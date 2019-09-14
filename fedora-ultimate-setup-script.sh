@@ -151,7 +151,7 @@ EOL
 # setup jack
 #==================================================================================================
 setup_jack() {
-    sudo usermod -a -G jackuser chudokitty # Add current user to jackuser group
+    sudo usermod -a -G jackuser "$LOGNAME" # Add current user to jackuser group
     sudo tee /etc/security/limits.d/95-jack.conf <<EOL
 # Default limits for users of jack-audio-connection-kit
 
@@ -182,7 +182,7 @@ setup_git() {
 # setup mpv (before it is run config file or dir does not exist)
 #==================================================================================================
 setup_mpv() {
-    #mkdir "$HOME/.config/mpv"
+    mkdir -p "$HOME/.config/mpv"
     cat >"$HOME/.config/mpv/mpv.conf" <<EOL
 profile=gpu-hq
 hwdec=auto
