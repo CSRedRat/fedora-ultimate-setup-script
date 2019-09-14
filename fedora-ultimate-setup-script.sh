@@ -26,21 +26,18 @@ RESET=$(tput sgr0)
 #==================================================================================================
 system_updates_dir="$HOME/offline-system-updates"
 user_updates_dir="$HOME/offline-user-packages"
-GIT_EMAIL='example@example.com'
-GIT_USER_NAME='example-name'
+GIT_EMAIL='csredrat@gmail.com'
+GIT_USER_NAME='csredrat'
 REMOVE_LIST=(gnome-photos gnome-documents rhythmbox totem cheese)
 
 create_package_list() {
     declare -A packages=(
         ['drivers']='libva-intel-driver fuse-exfat'
         ['multimedia']='mpv ffmpeg mkvtoolnix-gui shotwell'
-        ['utils']='gnome-tweaks tldr whipper keepassx transmission-gtk lshw mediainfo klavaro youtube-dl'
-        ['gnome_extensions']='gnome-shell-extension-auto-move-windows.noarch gnome-shell-extension-pomodoro'
-        ['emulation']='winehq-stable dolphin-emu mame'
+        ['utils']='tldr whipper keepassx transmission-gtk lshw mediainfo klavaro youtube-dl'
+        ['emulation']='winehq-stable mame'
         ['audio']='jack-audio-connection-kit'
         ['backup_sync']='borgbackup syncthing'
-        ['languages']='java-1.8.0-openjdk nodejs php php-json'
-        ['webdev']='code chromium chromium-libs-media-freeworld docker docker-compose ShellCheck'
         ['firefox extensions']='mozilla-https-everywhere mozilla-privacy-badger mozilla-ublock-origin'
     )
     for package in "${!packages[@]}"; do
@@ -154,7 +151,7 @@ EOL
 # setup jack
 #==================================================================================================
 setup_jack() {
-    sudo usermod -a -G jackuser "$USERNAME" # Add current user to jackuser group
+    sudo usermod -a -G jackuser chudokitty # Add current user to jackuser group
     sudo tee /etc/security/limits.d/95-jack.conf <<EOL
 # Default limits for users of jack-audio-connection-kit
 
@@ -185,11 +182,15 @@ setup_git() {
 # setup mpv (before it is run config file or dir does not exist)
 #==================================================================================================
 setup_mpv() {
-    mkdir "$HOME/.config/mpv"
+    #mkdir "$HOME/.config/mpv"
     cat >"$HOME/.config/mpv/mpv.conf" <<EOL
 profile=gpu-hq
 hwdec=auto
 fullscreen=yes
+gpu-context=drm
+video-sync=display-resample
+interpolation
+tscale=oversample
 EOL
 }
 
@@ -360,15 +361,15 @@ EOL
     #==============================================================================================
     # setup gnome desktop gsettings
     #==============================================================================================
-    echo "${BOLD}Setting up Gnome...${RESET}"
-    gsettings set org.gnome.settings-daemon.plugins.media-keys max-screencast-length 0 # Ctrl + Shift + Alt + R to start and stop screencast
-    gsettings set org.gnome.desktop.wm.preferences button-layout 'appmenu:minimize,maximize,close'
-    gsettings set org.gnome.desktop.interface clock-show-date true
-    gsettings set org.gnome.desktop.session idle-delay 1200
-    gsettings set org.gnome.desktop.input-sources xkb-options "['caps:backspace', 'terminate:ctrl_alt_bksp']"
-    gsettings set org.gnome.shell.extensions.auto-move-windows application-list "['org.gnome.Nautilus.desktop:2', 'org.gnome.Terminal.desktop:3', 'code.desktop:1', 'firefox.desktop:1']"
-    gsettings set org.gnome.shell enabled-extensions "['pomodoro@arun.codito.in', 'auto-move-windows@gnome-shell-extensions.gcampax.github.com']"
-    gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
+    #echo "${BOLD}Setting up Gnome...${RESET}"
+    #gsettings set org.gnome.settings-daemon.plugins.media-keys max-screencast-length 0 # Ctrl + Shift + Alt + R to start and stop screencast
+    #gsettings set org.gnome.desktop.wm.preferences button-layout 'appmenu:minimize,maximize,close'
+    #gsettings set org.gnome.desktop.interface clock-show-date true
+    #gsettings set org.gnome.desktop.session idle-delay 1200
+    #gsettings set org.gnome.desktop.input-sources xkb-options "['caps:backspace', 'terminate:ctrl_alt_bksp']"
+    #gsettings set org.gnome.shell.extensions.auto-move-windows application-list "['org.gnome.Nautilus.desktop:2', 'org.gnome.Terminal.desktop:3', 'code.desktop:1', 'firefox.desktop:1']"
+    #gsettings set org.gnome.shell enabled-extensions "['pomodoro@arun.codito.in', 'auto-move-windows@gnome-shell-extensions.gcampax.github.com']"
+    #gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
 
     #==============================================================================================
     # make a few little changes
@@ -376,7 +377,7 @@ EOL
     mkdir "$HOME/sites"
     echo "Xft.lcdfilter: lcdlight" >>"$HOME/.Xresources"
     echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
-    touch ~/Templates/empty-file # so you can create new documents from nautilus
+    touch ~/Шаблоны/empty-file # so you can create new documents from nautilus
     cat >>"$HOME/.bashrc" <<EOL
 alias ls="ls -ltha --color --group-directories-first" # l=long listing format, t=sort by modification time (newest first), h=human readable sizes, a=print hidden files
 alias tree="tree -Catr --noreport --dirsfirst --filelimit 100" # -C=colorization on, a=print hidden files, t=sort by modification time, r=reversed sort by time (newest first)
