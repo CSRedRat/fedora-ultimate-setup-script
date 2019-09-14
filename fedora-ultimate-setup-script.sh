@@ -28,7 +28,7 @@ system_updates_dir="$HOME/offline-system-updates"
 user_updates_dir="$HOME/offline-user-packages"
 GIT_EMAIL='csredrat@gmail.com'
 GIT_USER_NAME='csredrat'
-REMOVE_LIST=(gnome-photos gnome-documents rhythmbox totem cheese)
+REMOVE_LIST=(claws-mail abiword gnumeric pidgin gnome-photos gnome-documents rhythmbox totem cheese)
 
 create_package_list() {
     declare -A packages=(
@@ -52,7 +52,7 @@ create_package_list() {
 add_repositories() {
     echo "${BOLD}Adding repositories...${RESET}"
     sudo dnf -y install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
-    sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+    #sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
     if [[ ${PACKAGES_TO_INSTALL[*]} == *'winehq-stable'* ]]; then
         sudo dnf config-manager --add-repo https://dl.winehq.org/wine-builds/fedora/29/winehq.repo
