@@ -1,6 +1,6 @@
 # Fedora Xfce Setup Script
 
-Using only the [official Fedora 30 Xfce ISO](https://getfedora.org)
+Using only the [official Fedora 30 Xfce ISO](https://spins.fedoraproject.org/ru/xfce/)
 create your perfect Fedora experience and save it to a USB drive to preserve
 forever!
 
