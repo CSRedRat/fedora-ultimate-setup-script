@@ -5,14 +5,14 @@
 #         FILE: fedora-ultimate-setup-script.sh
 #        USAGE: fedora-ultimate-setup-script.sh
 #
-#  DESCRIPTION: Post-installation setup script for Fedora 29 Workstation
-#      WEBSITE: https://www.elsewebdevelopment.com/
+#  DESCRIPTION: Post-installation setup script for Fedora 30 Xfce
+#      WEBSITE: http://metin2wiki.ru/wiki/%D0%A3%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0_Fedora
 #
-# REQUIREMENTS: Fresh copy of Fedora 29/30 installed on your computer
-#               https://dl.fedoraproject.org/pub/fedora/linux/releases/29/Workstation/x86_64/iso/
-#       AUTHOR: David Else
-#      COMPANY: Else Web Development
-#      VERSION: 2.2.1
+# REQUIREMENTS: Fresh copy of Fedora 30 Xfce installed on your computer
+#               https://torrent.fedoraproject.org/torrents/Fedora-Xfce-Live-x86_64-30.torrent
+#       AUTHOR: Sergey Chudakov aka CSRedRat
+#      COMPANY: Talisman
+#      VERSION: 0.9
 #==================================================================================================
 
 # WARNING sudo time outs and you need to enter password a few times
@@ -32,9 +32,9 @@ REMOVE_LIST=(claws-mail abiword gnumeric pidgin gnome-photos gnome-documents rhy
 
 create_package_list() {
     declare -A packages=(
-        ['drivers']='libva-intel-driver fuse-exfat'
-        ['multimedia']='mpv ffmpeg mkvtoolnix-gui shotwell'
-        ['utils']='tldr whipper keepassx transmission-gtk lshw mediainfo klavaro youtube-dl'
+        ['drivers']='fuse-exfat'
+        ['multimedia']='mpv ffmpeg mkvtoolnix-gui shotwell pinta'
+        ['utils']='tldr whipper keepassx transmission-gtk lshw mediainfo klavaro youtube-dl htop mlocate mc grc neofetch'
         ['emulation']='winehq-stable mame'
         ['audio']='jack-audio-connection-kit'
         ['backup_sync']='borgbackup syncthing'
@@ -52,6 +52,22 @@ create_package_list() {
 add_repositories() {
     echo "${BOLD}Adding repositories...${RESET}"
     sudo dnf -y install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+    sudo dnf -y install https://github.com/rpmsphere/noarch/raw/master/r/rpmsphere-release-30-1.noarch.rpm
+    
+    sudo dnf install -y dnf-plugins-core
+    sudo dnf copr enable -y tkorbar/cheat
+    sudo dnf copr enable -y konimex/neofetch
+    sudo dnf copr enable -y angeldm/psensor
+    
+    sudo dnf -y install snapd
+    sudo systemctl enable --now snapd.socket
+    sudo snap set system refresh.timer=4:00-7:00,21:00-23:50
+    sudo ln -s /var/lib/snapd/snap /snap
+    sudo sh -c "echo 'export PATH="$PATH:/snap/bin/"' >> /etc/profile"
+    source /etc/profile
+    sudo snap install snapd
+    sudo snap install snap-store
+    
     #sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
     if [[ ${PACKAGES_TO_INSTALL[*]} == *'winehq-stable'* ]]; then
@@ -61,6 +77,7 @@ add_repositories() {
     if [[ ${PACKAGES_TO_INSTALL[*]} == *'code'* ]]; then
         sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
         sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
+        sudo dnf install https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
     fi
 }
 
