@@ -15,7 +15,7 @@ development, but it also has things like setting up mpv for GPU acceleration,
 Pulse Audio for high sound quality and some great Gnome desktop settings.
 
 ![screenshot](https://github.com/David-Else/fedora-ultimate-setup-script/blob/master/script-screenshot.png)
-![screenshot](https://github.com/David-Else/fedora-ultimate-setup-script/blob/master/Screenshot_2019-09-14_17-22-14.png)
+![screenshot](https://github.com/CSRedRat/fedora-xfce-setup-script/blob/master/Screenshot_2019-09-14_17-22-14.png)
 
 # How to Use
 
