@@ -1,6 +1,6 @@
-# Fedora Ultimate Setup Script
+# Fedora Xfce Setup Script
 
-Using only the [official Fedora 30 Workstation ISO](https://getfedora.org)
+Using only the [official Fedora 30 Xfce ISO](https://getfedora.org)
 create your perfect Fedora experience and save it to a USB drive to preserve
 forever!
 
@@ -23,8 +23,8 @@ Pulse Audio for high sound quality and some great Gnome desktop settings.
 Download this repository using git, CD into the directory, and run:
 
 ```
-git clone https://github.com/David-Else/fedora-ultimate-setup-script
-cd fedora-ultimate-setup-script
+git clone https://github.com/CSRedRat/fedora-xfce-setup-script
+cd fedora-xfce-setup-script
 ./fedora-ultimate-setup-script.sh
 ```
 
