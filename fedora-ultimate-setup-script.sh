@@ -32,12 +32,15 @@ REMOVE_LIST=(claws-mail abiword gnumeric pidgin gnome-photos gnome-documents rhy
 
 create_package_list() {
     declare -A packages=(
-        ['drivers']='fuse-exfat'
+        ['drivers']='fuse-exfat vulkan' #libva-intel-driver libva-intel-hybrid-driver vdpauinfo libva-vdpau-driver libva-utils libva-vdpau-driver akmod-nvidia-340xx xorg-x11-drv-nvidia-340xx xorg-x11-drv-nvidia-340xx-cuda xorg-x11-drv-nvidia-340xx-libs gcc kernel-headers kernel-devel
         ['multimedia']='mpv ffmpeg mkvtoolnix-gui shotwell pinta'
-        ['utils']='tldr whipper keepassx transmission-gtk lshw mediainfo klavaro youtube-dl htop mlocate mc grc neofetch'
-        ['emulation']='winehq-stable mame'
+        ['utils']='tldr whipper keepassx transmission-gtk lshw mediainfo klavaro youtube-dl htop mlocate mc grc neofetch numlockx' #gnome-tweaks
+        #['gnome_extensions']='gnome-shell-extension-auto-move-windows.noarch gnome-shell-extension-pomodoro'
+        ['emulation']='winehq-stable mame' #dolphin-emu
         ['audio']='jack-audio-connection-kit'
-        ['backup_sync']='borgbackup syncthing'
+        #['backup_sync']='borgbackup syncthing'
+        #['languages']='java-1.8.0-openjdk nodejs php php-json'
+        #['webdev']='code chromium chromium-libs-media-freeworld docker docker-compose ShellCheck'
         ['firefox extensions']='mozilla-https-everywhere mozilla-privacy-badger mozilla-ublock-origin'
     )
     for package in "${!packages[@]}"; do
@@ -63,7 +66,7 @@ add_repositories() {
     sudo systemctl enable --now snapd.socket
     sudo snap set system refresh.timer=4:00-7:00,21:00-23:50
     sudo ln -s /var/lib/snapd/snap /snap
-    sudo sh -c "echo 'export PATH="$PATH:/snap/bin/"' >> /etc/profile"
+    sudo sh -c "echo 'export PATH="\$PATH:/snap/bin/"' >> /etc/profile"
     source /etc/profile
     sudo snap install snapd
     sudo snap install snap-store
@@ -77,7 +80,7 @@ add_repositories() {
     if [[ ${PACKAGES_TO_INSTALL[*]} == *'code'* ]]; then
         sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
         sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
-        sudo dnf install https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
+        sudo dnf install -y https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
     fi
 }
 
