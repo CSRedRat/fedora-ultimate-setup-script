@@ -12,7 +12,7 @@ access to the internet.**
 
 As default it has my custom tweaked setup that is biased towards front end web
 development, but it also has things like setting up mpv for GPU acceleration,
-Pulse Audio for high sound quality and some great Gnome desktop settings.
+Pulse Audio for high sound quality and some great Terminal emulator settings.
 
 ![screenshot](https://github.com/David-Else/fedora-ultimate-setup-script/blob/master/script-screenshot.png)
 ![screenshot](https://github.com/CSRedRat/fedora-xfce-setup-script/blob/master/Fedora_30_Xfce_2019-09-15.png)
@@ -85,7 +85,7 @@ REMOVE_LIST=(gnome-photos gnome-documents rhythmbox totem cheese)
 ### Customize the adding of repositories
 
 In the `add_repositories()` function you will see
-[RPM Fusion](https://rpmfusion.org/) and [Flathub](https://flathub.org/home) are
+[RPM Fusion](https://rpmfusion.org/), [RPM Sphere](https://rpmsphere.github.io/) and [Snap](https://snapcraft.io/store) are
 installed by default. After that certain packages trigger certain repositories
 to be installed. You can add your own here.
 
