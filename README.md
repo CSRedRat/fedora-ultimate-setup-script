@@ -1,8 +1,7 @@
 # Fedora Ultimate Setup Script
+Based on https://github.com/David-Else/fedora-ultimate-setup-script
 
 ## V3 UPDATED VERSION including Centos 8 Scripts
-
-![screenshot](https://github.com/David-Else/fedora-ultimate-setup-script/blob/master/install-script-v3.png)
 
 ### Total rewrite for ease of customization
 
@@ -60,8 +59,6 @@ access to the internet.**
 As default it has my custom tweaked setup that is biased towards front end web
 development, but it also has things like setting up mpv for GPU acceleration,
 Pulse Audio for high sound quality and some great Gnome desktop settings.
-
-![screenshot](https://github.com/David-Else/fedora-ultimate-setup-script/blob/master/script-screenshot.png)
 
 # How to Use
 
